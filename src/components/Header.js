@@ -30,7 +30,6 @@ const Title = styled.div`
 `;
 
 const Header = () => {
-  const [isDisabled, setIsDisabled] = useState(true);
 
   return (
     <Title>
