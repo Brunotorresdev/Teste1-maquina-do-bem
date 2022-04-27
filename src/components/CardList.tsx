@@ -1,8 +1,9 @@
+import React from "react";
 import react, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Coracao from "../assets/coracao.png";
 import CoracaoAzul from "../assets/coracaoazul.png";
-import Dinheiro from "../assets/dinheiro.png";
+import { Card } from "../types";
 
 // Sessão de cards da página
 
@@ -132,55 +133,69 @@ const Footer = styled.div`
   color: #879bad;
 `;
 
-const CardList = ({ card }) => {
-  const [imagem, setImagem] = useState();
-  const [button, setButton] = useState();
-  const [text, setText] = useState();
-  const [title, setTitle] = useState();
+const CardList = ({ card }: { card: Card; key: number }) => {
+  //estado para renderizar a imagem e os botoes dos cards
+  const [imagem, setImagem] = useState<string>();
+  const [button, setButton] = useState<string>();
 
   useEffect(() => {
-    if (card.tipo === "Voluntariado") {
+    if (card.level === "subscribe") {
       setImagem(Coracao);
       setButton("Participar");
-      setText("HORAS SEMANAIS");
-      setTitle("VAGA DE VOLUNTARIADO");
-    } else if (card.tipo === "Materias") {
+    } else {
       setImagem(CoracaoAzul);
       setButton("Doar");
-      setText("ÍTENS DISPONÍVEIS");
-      setTitle("DOAÇÃO DE MATERIAIS");
-    } else {
-      setImagem(Dinheiro);
-      setButton("Contribuir");
-      setText("VALOR ESPERADO");
-      setTitle("CAMPANHA DE ARRECADAÇÃO");
     }
-  }, []);
+  });
 
   return (
     <BodyCard>
+      {/* titulo do card */}
       <HeaderCard>
-        <p>{title}</p>
+        <p>
+          {card.level === "subscribe"
+            ? "Vaga de voluntariado"
+            : "Doação de material"}
+        </p>
       </HeaderCard>
       <Line />
       <Container>
         <Container1>
           <TextArea>
-            <TextP>{card.titulo}</TextP> <Span>SP Invisivel</Span>{" "}
+            {/* nome da vaga             nome da açao */}
+            <TextP>
+              {card.subscribe_data
+                ? card.subscribe_data.title
+                : card.material_data.title}
+            </TextP>{" "}
+            <Span>{card.action_data.title}</Span>{" "}
           </TextArea>
           <Image src={imagem} alt="Image icon" />
         </Container1>
         <Container2>
           <Info>
-            <Info1>{card.valor}</Info1>
-            <Info2>{text}</Info2>
+            {/* vagas disponiveis */}
+            <Info1>
+              {card.subscribe_data
+                ? card.subscribe_data.position.available
+                : card.material_data.position.available}
+            </Info1>
+            <Info2>
+              {card.subscribe_data ? "Vagas Disponíveis" : "itens disponíveis"}
+            </Info2>
           </Info>
           <Button>{button}</Button>
         </Container2>
       </Container>
       <Line />
       <Footer>
-        <div>Natal, RN</div>
+        {/* endereço da vaga */}
+        <div>
+          {" "}
+          {`${card.subscribe_data ? card.subscribe_data.address.city : ""} ${
+            card.subscribe_data ? card.subscribe_data.address.state : "Remoto"
+          } `}{" "}
+        </div>
       </Footer>
     </BodyCard>
   );

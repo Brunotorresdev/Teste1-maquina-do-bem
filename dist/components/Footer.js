@@ -1,9 +1,11 @@
-import react, { useState } from "react";
-import styled from "styled-components";
-
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const styled_components_1 = __importDefault(require("styled-components"));
 // Componentização e estilização da parte abaixo dos Cards
-
-const ButtonFooter = styled.button`
+const ButtonFooter = styled_components_1.default.button `
   width: 233px;
   height: 51px;
   margin-top: 34.5px;
@@ -22,9 +24,7 @@ const ButtonFooter = styled.button`
 
   cursor: pointer;
 `;
-
 const Footer = () => {
-  return <ButtonFooter>Todas as Oportunidades</ButtonFooter>;
+    return <ButtonFooter>Todas as Oportunidades</ButtonFooter>;
 };
-
-export default Footer;
+exports.default = Footer;

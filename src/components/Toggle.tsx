@@ -2,9 +2,8 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import Switch, { SwitchProps } from "@mui/material/Switch";
+
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -86,7 +85,7 @@ const Android12Switch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const IOSSwitch = styled((props) => (
+const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
@@ -109,7 +108,7 @@ const IOSSwitch = styled((props) => (
       },
     },
     "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
+      color: "#2EC445",
       border: "6px solid #fff",
     },
     "&.Mui-disabled .MuiSwitch-thumb": {
@@ -184,7 +183,10 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 export default function CustomizedSwitches() {
   return (
     <FormGroup>
-      <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} defaultChecked />} />
+      <FormControlLabel
+        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+        label=""
+      />
     </FormGroup>
   );
 }
